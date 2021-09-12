@@ -1,3 +1,6 @@
+![alt text](https://www.paepper.com/blog/posts/depthwise-separable-convolutions-in-pytorch/depthwise-separable-convolution.png "Normal Convolution vs Depthwise seperable")
+Comparison of a normal convolution and a depthwise separable convolution. **a)** Standard convolution with a 3x3 kernel and 3 input channels. The projection of one value is shown from the 3x3x3 (dark blue) input values to 6 colorful outputs which would be 6 output channels. **b)** Depthwise separable convolution with a 3x3 kernel and 3 input channels. First a depthwise convolution projects 3x3 pixels of each input channel to one corresponding output pixel (matching colors). Then a pointwise convolution uses these 3 output pixels to determine the 6 final output pixels.
+
 # Depthwise seperable convolution using PyTorch
 The depthwise convolution unlike the standard convolution acts only on a single channel of the input map at a time. So for each channel, we need to compute ` W * H * 1 * K * K ` FLOPs. As we have `C channels`, this sums to `W * H * C * K * K FLOPs` . The result is a map of `C * W * H` just like our input map.`
 
