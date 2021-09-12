@@ -15,3 +15,10 @@ Together, that’s `C * (K * K + O)` parameters which is again about 8 times les
 
 # Implementation in PyTorch
 checkout the code in `depthwise-seperable-convoulution.py`
+
+As you can see it’s super easy to implement and can save you a lot of parameters. You simply change the standard convolution to have the same number of out_channels as in_channels (here: 10) and also add the groups parameter which you set to the same value as well. This takes care of our spatial interactions and the groups separates the channels from each other. Then the pointwise convolution is just a convolution mapping the in_channels to the out_channels we had before (here: 32) using a kernel of size 1. To bind them together, you can use the torch.nn.Sequential, so they are executed one after the other as a bundled module.
+
+Note that for simplicity, I set bias=False for all convolutions here as I didn’t mention the bias in any of the formulas in this post.
+
+# References
+A huge thanks to this [blogpost](https://www.paepper.com/blog/posts/depthwise-separable-convolutions-in-pytorch/) for providing all the resources. 
